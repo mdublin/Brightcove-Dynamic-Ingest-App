@@ -1,0 +1,20 @@
+curl \
+--include \
+--header "Authorization: BC_TOKEN [Insert Your Token Here, refer to this documentation for steps on procuring token: http://docs.brightcove.com/en/video-cloud/oauth-api/guides/get-client-credentials-postman.html ] " \
+--data 'name=NewApp03&maximum_scope=[{
+     "identity": {
+       "type": "video-cloud-account",
+       "account-id": [Insert Your Account ID here]
+   },
+   "operations": [
+     "video-cloud/video/all",
+     "video-cloud/player/all",
+     "video-cloud/ingest-profiles/profile/read",
+     "video-cloud/ingest-profiles/account/read"
+     ]
+   }]' \
+https://oauth.brightcove.com/v3/client_credentials
+
+
+
+
