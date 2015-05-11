@@ -15,7 +15,7 @@ import json
 import feedparser 
 
 
-d = feedparser.parse('http://api.brightcove.com/services/library?command=search_videos&any=tag:nba&output=mrss&media_delivery=http&sort_by=CREATION_DATE:DESC&token=NU-nMdtzfF8z9NNinlAgM4c9S-9BBfKpm6gFISdwyk-AnQ84efFBbQ..')
+d = feedparser.parse('[Inset Your Feed URL here]')
 response_array = []
 
 
