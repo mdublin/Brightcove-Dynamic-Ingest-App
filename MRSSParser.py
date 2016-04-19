@@ -9,24 +9,31 @@ print "Content-type: application/json\n\n"
 #source URL
 
 import BC_01
-
 import json
-
 import feedparser 
+import models
+
+#create video table object:
+Video = models.Video()
 
 
-d = feedparser.parse('[Inset Your Feed URL here]')
+d = feedparser.parse('http://cdn-api.ooyala.com/v2/syndications/3998dd7a6eb544d080d5012493667b2a/feed?pcode=V5eGMxOmojeG41Ql4vnvvCfqHiPE')
 response_array = []
 
 
 #For each item in the feed
 
 for index, post in enumerate(d.entries): 
-    if index >= 12:
+    if index >= 2:
         break             
     print post.title+":"
     #print post.link+""
     print post.description+":"
+
+    #character check for description, BC short description field only allows for 250 characters:
+    if len(post.description) > 250:
+        print "Description text is greater than 250 characters, editing description text..."
+
     #print post.media_keywords+":"
     
     
@@ -89,5 +96,13 @@ for item in response_array:
     if not BC_01.videoNameExists(name):     #Calling our dedupe function
         print "did not see", name, "in brightcove, ingesting..."
         BC_01.createAndIngest(name, url, tags, desc)  #If no duplicates, call our Brightcove Dynamic Ingest function
+        #store in db
+        vid_store = models.Video(
+                video_name=name,
+                Source_URL=url,
+                )
+        models.session.add(vid_store)
+        models.session.commit()
+
     else:
         print "already saw", name, "skipping..."

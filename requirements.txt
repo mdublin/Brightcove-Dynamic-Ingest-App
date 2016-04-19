@@ -1,0 +1,5 @@
+requests==1.2.3
+SQLAlchemy==0.8.2
+psycopg2==2.6.1
+feedparser==5.2.1
+

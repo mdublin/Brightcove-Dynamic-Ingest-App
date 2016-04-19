@@ -11,6 +11,10 @@ import urllib
 import base64
 import json
 import requests
+import models
+
+#create video table object:
+Video = models.Video()
 
 
 
@@ -18,9 +22,10 @@ import requests
 #same directory as our Python scripts 
 
 def loadSecret():
-    credsFile=open('brightcove_oauth.txt')
+    credsFile=open('brightcove_oauth.json')
     creds = json.load(credsFile)
     return creds
+
 
 # get the oauth 2.0 token
 def getAuthToken(creds):
@@ -43,6 +48,7 @@ def getAuthToken(creds):
         data = response.read()
         result = json.loads( data )
         return result["access_token"]
+
     
 #What follows below are three functions that tackle the multi-step Dynamic Ingest process. For more
 #information on Brightcove's Dynamic Ingest API, see here: http://docs.brightcove.com/en/video-cloud/di-api/index.html
@@ -69,6 +75,7 @@ def ingestVid(account, token, vidId, videoUrl, profile="balanced-high-definition
     r = requests.post(url, data=json.dumps(data), headers=headers)
     res = json.loads(r.text)
     return res
+
 
 def createAndIngest(name, vUrl, tags=[], description=""):
     creds = loadSecret()
