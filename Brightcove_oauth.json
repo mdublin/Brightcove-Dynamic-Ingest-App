@@ -1,6 +1,6 @@
 {
- "account_id" : "30409504001",
-"client_secret" : "gcvBxscddY2VSNT3irL481winxdsAn8-PAygh3Hkh_uD_QhVzBOjTn791Are41xvlJcos-YJCyX5yFeyZHASZg",
-  "client_id" : "4fbecf56-c692-4155-9138-2ccbd9be2b7f"
+ "account_id" : "{Your Brightcove account ID}",
+"client_secret" : "{Client secret ID}",
+  "client_id" : "{Client ID}"
 }
 
