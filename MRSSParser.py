@@ -12,6 +12,7 @@ import BC_01
 import json
 import feedparser 
 import models
+import re
 
 #create video table object:
 Video = models.Video()
@@ -28,23 +29,45 @@ for index, post in enumerate(d.entries):
         break             
     print post.title+":"
     #print post.link+""
-    print post.description+":"
+    #print post.description+":"
+    print post.description
 
     #character check for description, BC short description field only allows for 250 characters:
-    if len(post.description) > 250:
-        print "Description text is greater than 250 characters, editing description text..."
 
+    text_split = []
+    newstring = ""
+    endstring = ""
+
+    textblock = post.description.split(".")
+
+    for sen in textblock:
+        print sen
+        if (len(sen) < 250) and (len(newstring) < 250 or None):
+            newstring += sen + "."
+            print(len(newstring))
+            if newstring >= 250:
+                print "THIS IS ENDSTRING:"
+                endstring = sen
+                print endstring
+                break
+            else:
+                endstring += sen + "."
+                print(endstring)
+
+    
     #print post.media_keywords+":"
-    
-    
-    #Here we set up a dictionary in order to extract selected data from the original brightcove "post" result
-    
+
+    #Here we set up a dictionary in order to extract selected data from the original brightcove "post" result    
     item = {}
     item['name'] = post.title
-    item['description'] = post.description
+    item['description'] = endstring
+    #item['description'] = post.description
     #item['url'] = u"%s" % post.link       
     item['tags'] = post.media_keywords.split(",")
-    
+    #tag cleanup, sometimes your feed has empty tags like " ", Brightcove's Dynamic Ingest API cannot handle empty tags and will totally reject the asset
+    tags = item['tags']
+    tags = filter(None, tags)
+    item['tags'] = tags
 
     #Below is a for loop that iterates through an MRSS or JSON feed that has multiple-bitrate video renditions.
     #If you're feed doesn't have multiple rendention, you can delete or comment out the loop below and just use
@@ -53,10 +76,12 @@ for index, post in enumerate(d.entries):
     # -- initially we say the highest bitrate is 0 (since we dont have any video yet)
     max_bitrate = 0
     vid_url = None 
-    videos = post.media_content
-    
+    #videos = post.media_content
+    #print videos
+
+
     # -- For each video in the item
-    for video in videos:
+    """for video in videos:
         # -- If the video has a value for its bitrate
         if 'bitrate' in video:
             # -- Extract the value of this video's bitrate
@@ -71,11 +96,18 @@ for index, post in enumerate(d.entries):
                 vid_url = video['url']
             # -- This line simply prints out the maximum bitrate and current video URL for each iteration
     #print "{} url {}".format(max_bitrate, vid_url)
-    #print "highest bitrate {} url {}".format(max_bitrate, vid_url)
+    #print "highest bitrate {} url {}".format(max_bitrate, vid_url) """
     
-    item['url'] = vid_url
+    print "THIS IS post.media_content!!!"
+    media_content_dict = post.media_content[0]
+    print media_content_dict['url']
+    item['url'] = media_content_dict['url']
+
     
     response_array.append(item)
+    print "THIS IS RESPONSE_ARRAY"
+    print response_array
+
 
 refactored = []
 for entity in response_array:

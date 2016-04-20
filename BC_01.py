@@ -69,7 +69,7 @@ def createVid(account, token, name, tags=[], description=""):
 
 
 def ingestVid(account, token, vidId, videoUrl, profile="balanced-high-definition"):
-    url = 'https://cms.api.brightcove.com/v1/accounts/[Insert Account ID]/videos/{}/ingest-requests'.format(vidId)
+    url = 'https://cms.api.brightcove.com/v1/accounts/30409504001/videos/{}/ingest-requests'.format(vidId)
     headers = { "Authorization": "Bearer " + token, "Content-Type": "application/json" }
     data = {"master": {"url" : videoUrl}, "profile": profile}
     r = requests.post(url, data=json.dumps(data), headers=headers)

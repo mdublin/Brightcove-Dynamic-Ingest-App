@@ -24,6 +24,7 @@ class Video(Base):
     video_name = Column(String, nullable=True)
     #description = Column(String)
     BCid = Column(String, nullable=True)
+    #job id returned from BC Dynamic Ingest API
     DynamicIngest_response = Column(String, nullable=True)
     Source_URL = Column(String, nullable=True)
     stored = Column(DateTime, default=datetime.utcnow)
