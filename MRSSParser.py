@@ -44,7 +44,7 @@ for index, post in enumerate(d.entries):
 
     for sen in textblock:
         print sen
-        if (len(sen) < 250) and (len(newstring) < 250 or None):
+        if (len(sen) < 250) and (len(newstring) < 250):
             newstring += sen + "."
             print(len(newstring))
             if newstring >= 250:
