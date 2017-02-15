@@ -1,6 +1,6 @@
 # Brightcove-Dynamic-Ingest-App
 
-Python solution that uses Brightcove's Dynamic Ingest API to upload video content and associated metadta parsed from MRSS and JSON feeds. 
+Python solution that uses Brightcove's Dynamic Ingest API to upload video content and associated metadata parsed from MRSS and JSON feeds. 
 
 The `BC_01.py` is our "Brightcove module" that contains oAuth, Dynamic Ingest, and deupe functions. Regarding the latter, this script relies upon the Brightcove CMS to act as a proxy database wherein we can check to see which videos have already been passed/uploaded to your Brightcove account. The feed parser portion of the script is very simple, using the Feedparser module. You can adjust the feed parser section of the code to suit your needs as long as all the required elements (video URL, name, description, tags) are passed to the `response_array`.
 
