@@ -8,6 +8,12 @@ Also included is an `oauth.sh` script that uses cURL to obtain OAuth 2.0 credent
 
 As a reminder, you will need to create oAuth credentials using the commands in the Brightcove oAuth cURL Command file. Additionally, you will also need an API URL Read token from our Brightcove account so that the script can make a GET request to the Brightcove CMS to search for a specific video by video title. 
 
+
+## Installation
+
+
+
+
 Dynamic Ingest API: 
 
 Brightcove's Dynamic Ingest (DI) API is based on functionality where video source files are downloaded from the customer's storage location and specified renditions of the source files are created. The platform is cloud-centric, globally-distributed and based on modern practices to deliver best in class consistency and speed.
