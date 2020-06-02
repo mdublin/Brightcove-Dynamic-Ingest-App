@@ -1,4 +1,4 @@
-# Brightcove-Dynamic-Ingest-App
+# Brightcove Dynamic Ingest App
 
 Python solution that uses Brightcove's Dynamic Ingest API to upload video content and associated metadata parsed from MRSS and JSON feeds. 
 
